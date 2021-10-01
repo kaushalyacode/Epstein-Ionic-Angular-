@@ -1,0 +1,7 @@
+{
+  "name": "epstein",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
