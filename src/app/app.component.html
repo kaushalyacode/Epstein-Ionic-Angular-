@@ -1,3 +1,37 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-header [translucent]="true">
+        <div *ngIf="isAuthenticate;else elseblock">    
+          <div *ngIf="isParent">    
+                <app-navigation-parent></app-navigation-parent>
+          </div>
+          <div *ngIf="isTeacher">    
+              <app-navigation-teacher></app-navigation-teacher>
+          </div>
+      </div>
+      <ng-template #elseblock>
+          <app-navigation></app-navigation>
+      </ng-template>
+  </ion-header>  
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Blank</ion-title>
+      </ion-toolbar>
+    </ion-header>    
+    <div *ngIf="isAuthenticate; else logged">
+        <div *ngIf="isParent;else elseblockTeacher">   
+            <app-menu-parent></app-menu-parent>                 
+        </div>
+        <ng-template #elseblockTeacher>
+          <div *ngIf="isTeacher">   
+            <app-menu-teacher></app-menu-teacher>                  
+          </div>       
+        </ng-template>
+    </div>
+    <ng-template #logged>
+      <app-login (childEventParent)="isParenter($event)" (childEventTeacher)="isTeacherer($event)"></app-login> 
+    </ng-template>
+  </ion-content>
+
+  <router-outlet></router-outlet>
 </ion-app>
